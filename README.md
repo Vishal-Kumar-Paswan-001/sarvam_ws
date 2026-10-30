@@ -68,8 +68,11 @@ Settings → Environment Variables (Production + Preview + Development):
 ### 4. Add Redis (Upstash)
 
 Vercel → **Storage → Marketplace → Upstash Redis** → create a database and
-connect it to the project. That injects `UPSTASH_REDIS_REST_URL` and
-`UPSTASH_REDIS_REST_TOKEN` for you.
+connect it to the project. Depending on which integration you add, it injects
+either `UPSTASH_REDIS_REST_URL` / `UPSTASH_REDIS_REST_TOKEN` or the Vercel KV
+names `KV_REST_API_URL` / `KV_REST_API_TOKEN`. **Both are accepted** — the app
+reads whichever is present. (`REDIS_URL` is a `redis://` TCP URL and is not used
+by the REST client.)
 
 **Redis is required on Vercel.** A WebSocket connection is pinned to one function
 instance, and in-memory state does not cross instances — so rooms and presence
